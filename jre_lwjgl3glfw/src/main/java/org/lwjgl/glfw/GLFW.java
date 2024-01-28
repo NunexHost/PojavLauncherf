@@ -1073,9 +1073,9 @@ public class GLFW
     public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
     public static void glfwPollEvents() {
-        if (!mGLFWIsInputReady) {
-            mGLFWIsInputReady = false;
-            CallbackBridge.nativeSetInputReady(true);
+        long __functionAddress = Functions.PollEvents;
+        invokeV(__functionAddress);
+	    
         }
         callV(Functions.SetupEvents);
         for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
