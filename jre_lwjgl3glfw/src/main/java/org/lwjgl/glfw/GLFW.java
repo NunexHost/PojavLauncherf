@@ -818,8 +818,6 @@ public class GLFW
         long __functionAddress = Functions.Init;
         EventLoop.check();
         return invokeI(__functionAddress) != 0;
-        }
-        return isGLFWReady;
     }
 
     public static void glfwTerminate() {
