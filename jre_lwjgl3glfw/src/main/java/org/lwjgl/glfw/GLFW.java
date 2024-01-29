@@ -1072,12 +1072,19 @@ public class GLFW
 
     public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
-    public static void glfwPollEvents() {
-		glfwPollEventsJni(callback);
+    public static void pollEvents() {
+    if (!mGLFWIsInputReady) {
+        // Atualização: Armazenar o timestamp da última consulta de eventos.
+        long lastPollTime = System.nanoTime();
+
+        // Consulta de eventos GLFW.
+        glfwPollEvents();
+
+        // Atualização da flag e notificação da ponte de callbacks.
+        mGLFWIsInputReady = true;
+        CallbackBridge.nativeSetInputReady(true, lastPollTime);
         }
-	private static native void glfwPollEventsJni(GlfwCallback javaCallback);
-		glfwPollEvents();
-        }
+	    
         callV(Functions.SetupEvents);
         for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
         callV(Functions.RewindEvents);
