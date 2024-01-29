@@ -15,6 +15,7 @@ import javax.annotation.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
@@ -1074,15 +1075,15 @@ public class GLFW
 
     public static void pollEvents() {
     if (!mGLFWIsInputReady) {
-        // Atualização: Armazenar o timestamp da última consulta de eventos.
+        // Armazenar o timestamp da última consulta de eventos.
         long lastPollTime = System.nanoTime();
-
-        // Consulta de eventos GLFW.
-        glfwPollEvents();
 
         // Atualização da flag e notificação da ponte de callbacks.
         mGLFWIsInputReady = true;
-        CallbackBridge.nativeSetInputReady(true, lastPollTime);
+        CallbackBridge.nativeSetInputReady(mGLFWIsInputReady);
+
+        // Consulta de eventos GLFW.
+        glfwPollEvents();
         }
 	    
         callV(Functions.SetupEvents);
