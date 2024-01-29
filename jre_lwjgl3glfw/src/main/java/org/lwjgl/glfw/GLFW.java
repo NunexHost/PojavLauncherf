@@ -1075,7 +1075,7 @@ public class GLFW
     public static void glfwPollEvents() {
         if (!mGLFWIsInputReady) {
             mGLFWIsInputReady = true;
-            CallbackBridge.nativeSetInputReady(true);
+            Callback.nativeSetInputReady(true);
         }
         callV(Functions.SetupEvents);
         for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
