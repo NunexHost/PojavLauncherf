@@ -1073,14 +1073,9 @@ public class GLFW
 
     public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
-    public static void pollEvents() {
-    if (!mGLFWIsInputReady) {
-        // Armazenar o timestamp da última consulta de eventos.
-        long lastPollTime = System.nanoTime();
-
-        // Atualização da flag e notificação da ponte de callbacks.
-        mGLFWIsInputReady = true;
-        CallbackBridge.nativeSetInputReady(mGLFWIsInputReady);
+    public static void glfwPollEvents() {
+        long __functionAddress = Functions.PollEvents;
+        invokeV(__functionAddress);
         }
 	    
         callV(Functions.SetupEvents);
