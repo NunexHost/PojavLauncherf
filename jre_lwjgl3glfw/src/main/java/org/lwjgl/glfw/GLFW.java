@@ -1081,9 +1081,6 @@ public class GLFW
         // Atualização da flag e notificação da ponte de callbacks.
         mGLFWIsInputReady = true;
         CallbackBridge.nativeSetInputReady(mGLFWIsInputReady);
-
-        // Consulta de eventos GLFW.
-        glfwPollEvents();
         }
 	    
         callV(Functions.SetupEvents);
