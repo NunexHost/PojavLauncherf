@@ -813,13 +813,11 @@ public class GLFW
         return lastCallback;
     }
 
-    static boolean isGLFWReady;
     public static boolean glfwInit() {
-        if (!isGLFWReady) {
-            //CallbackBridge.nativeAttachThreadToOther(false, false);
-            mGLFWInitialTime = (double) System.nanoTime();
-            long __functionAddress = Functions.Init;
-            isGLFWReady = invokeI(__functionAddress) != 0;
+        glfwInitialTime = (double) System.nanoTime();
+        long __functionAddress = Functions.Init;
+        EventLoop.check();
+        return invokeI(__functionAddress) != 0;
         }
         return isGLFWReady;
     }
