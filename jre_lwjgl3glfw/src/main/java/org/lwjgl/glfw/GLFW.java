@@ -629,8 +629,8 @@ public class GLFW
         SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval"),
         PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
         RewindEvents = apiGetFunctionAddress(GLFW, "pojavRewindEvents"),
-        SetupEvents = apiGetFunctionAddress(GLFW, "pojavComputeEventTarget");
-	PollEvents = apiGetFunctionAddress(GLFW, "glfwPollEvents"),
+        SetupEvents = apiGetFunctionAddress(GLFW, "pojavComputeEventTarget"),
+	PollEvents = apiGetFunctionAddress(GLFW, "glfwPollEvents");
     }
 
     public static SharedLibrary getLibrary() {
