@@ -813,6 +813,8 @@ public class GLFW
         return lastCallback;
     }
 
+    private static double glfwInitialTime;
+	
     public static boolean glfwInit() {
         glfwInitialTime = (double) System.nanoTime();
         long __functionAddress = Functions.Init;
