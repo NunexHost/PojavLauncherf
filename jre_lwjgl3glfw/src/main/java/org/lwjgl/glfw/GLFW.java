@@ -1073,13 +1073,22 @@ public class GLFW
     public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
     public static void glfwPollEvents() {
-        if (!mGLFWIsInputReady) {
-            mGLFWIsInputReady = true;
-            glfwCallback.nativeSetInputReady(true);
-        }
-        callV(Functions.SetupEvents);
-        for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
-        callV(Functions.RewindEvents);
+    if (!mGLFWIsInputReady) {
+        mGLFWIsInputReady = true;
+        CallbackBridge.nativeSetInputReady(true);
+    }
+
+    // Chama a função nativa para configurar eventos
+    Functions.setupEvents();
+
+    // Itera por todos os IDs de janela
+    for (Long ptr : mGLFWWindowMap.keySet()) {
+        // Chama a função nativa para processar eventos para cada janela
+        Functions.pumpEvents(ptr);
+    }
+
+    // Chama a função nativa para rebobinar eventos
+    Functions.rewindEvents();
     }
 
     public static void internalWindowSizeChanged(long window, int w, int h) {
