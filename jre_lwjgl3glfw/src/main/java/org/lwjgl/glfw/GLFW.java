@@ -1079,16 +1079,16 @@ public class GLFW
     }
 
     // Chama a função nativa para configurar eventos
-    Functions.setupEvents();
+    glfwSetupEvents();
 
     // Itera por todos os IDs de janela
     for (Long ptr : mGLFWWindowMap.keySet()) {
         // Chama a função nativa para processar eventos para cada janela
-        Functions.pumpEvents(ptr);
+        glfwPumpEvents(ptr);
     }
 
     // Chama a função nativa para rebobinar eventos
-    Functions.rewindEvents();
+    glfwRewindEvents();
     }
 
     public static void internalWindowSizeChanged(long window, int w, int h) {
