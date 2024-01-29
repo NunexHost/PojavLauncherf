@@ -818,7 +818,6 @@ public class GLFW
     public static boolean glfwInit() {
         glfwInitialTime = (double) System.nanoTime();
         long __functionAddress = Functions.Init;
-        EventLoop.check();
         return invokeI(__functionAddress) != 0;
     }
 
