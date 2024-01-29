@@ -1072,8 +1072,8 @@ public class GLFW
 
     public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
-    public static void PollEvents() {
-        if (mGLFWIsInputReady) {
+    public static void pollEvents() {
+        if (!mGLFWIsInputReady) {
             mGLFWIsInputReady = true;
             CallbackBridge.nativeSetInputReady(true);
         }
