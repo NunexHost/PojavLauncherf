@@ -630,6 +630,7 @@ public class GLFW
         PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
         RewindEvents = apiGetFunctionAddress(GLFW, "pojavRewindEvents"),
         SetupEvents = apiGetFunctionAddress(GLFW, "pojavComputeEventTarget");
+	PollEvents = apiGetFunctionAddress(GLFW, "glfwPollEvents"),
     }
 
     public static SharedLibrary getLibrary() {
@@ -1074,6 +1075,10 @@ public class GLFW
     public static void glfwSetWindowIcon(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("GLFWimage const *") GLFWImage.Buffer images) {}
 
     public static void glfwPollEvents() {
+        if (!mGLFWIsInputReady) {
+            mGLFWIsInputReady = true;
+            CallbackBridge.nativeSetInputReady(true);
+		
         long __functionAddress = Functions.PollEvents;
         invokeV(__functionAddress);
         }
